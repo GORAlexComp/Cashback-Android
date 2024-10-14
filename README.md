@@ -1,4 +1,6 @@
-[](.github/preview.jpg)
+![](.github/preview.jpg)
+
+
 
 ## !!! **Не офіційний Android-застосунок** !!!
 
