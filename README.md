@@ -1,25 +1,33 @@
 ![](.github/preview.jpg)
 
-
-
 ## :bangbang: **Не офіційний Android-застосунок**
 
 Додаток створено задля спрощення пошуку та визначення товарів та точок продажу, які беруть участь у програмі.
 
 #### Про державну програму можна [дізнатися тут](.github/cashback.md)
+
 <br>
 
-### :wrench: Використані мови та пакети:
+![](.github/line-changes.png)
+
+- 
+-
+-
+
+
+![](.github/line-utils.png)
+
 -
 -
 -
 
-### :iphone: Як зібрати свій додаток:
+
+![](.github/line-build.png)
+
 -
 -
 -
 
-### :name_badge: Останні зміни
--
--
--
+<br>
+
+![](.github/preview-footer.jpg)
