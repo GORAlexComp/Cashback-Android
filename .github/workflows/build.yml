@@ -1,0 +1,94 @@
+name: Android Build
+
+on:
+  push:
+    paths:
+      - 'app/version.properties'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Get Previous Version Name
+      id: previous_version
+      run: |
+        git fetch origin main --depth=2  # Загружаем последний и предыдущий коммит
+        PREV_VERSION=$(git show origin/main~1:app/version.properties | grep 'VERSION_NAME' | cut -d'=' -f2 | tr -d ' ')
+        echo "PREV_VERSION=$PREV_VERSION" >> $GITHUB_ENV
+
+    - name: Get Current Version Name
+      id: current_version
+      run: |
+        VERSION_NAME=$(grep 'VERSION_NAME' app/version.properties | cut -d'=' -f2 | tr -d ' ')
+        echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+
+    - name: Check if VERSION_NAME has changed
+      if: ${{ env.PREV_VERSION != env.VERSION_NAME }}
+      run: echo "VERSION_NAME has changed. Proceeding with build..."
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: 'temurin'
+
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build APK
+      run: ./gradlew assembleRelease
+
+    - name: Upload APK to Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
+        draft: false  # Установить в true, если хочешь сначала проверить релиз
+        prerelease: false
+
+    - name: Upload APK to Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: app/build/outputs/apk/release/app-release.apk
+        asset_name: app-release.apk
+        asset_content_type: application/vnd.android.package-archive
+
+    - name: Notify Telegram on Success
+      if: ${{ success() }}
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        GITHUB_COMMIT_URL: ${{ github.event.head_commit.url }}
+        VERSION_NAME: ${{ env.VERSION_NAME }}
+      run: |
+        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
+        -d chat_id=$TELEGRAM_CHANNEL_ID \
+        -d text="✅ *Новая версия приложения* v$VERSION_NAME успешно собрана!\n\nКоммит: $GITHUB_COMMIT_URL"
+
+    - name: Send APK to Telegram
+      if: ${{ success() }}
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+      run: |
+        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
+        -F chat_id=$TELEGRAM_CHANNEL_ID \
+        -F document=@app/build/outputs/apk/release/app-release.apk \
+        -F caption="v$VERSION_NAME – Собранная версия"
