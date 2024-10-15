@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/blockMargin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/blockMargin"
+        tools:ignore="UseCompoundDrawables">
+
+	    <TextView
+		    android:id="@+id/tv_ean"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:layout_marginBottom="15dp"
+		    android:fontFamily="@font/eukraine_regular"
+		    android:text="@string/ean"
+		    android:textSize="@dimen/textBig"
+		    android:textStyle="bold" />
+
+	    <ImageView
+		    android:id="@+id/iv_ean"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@color/whiteColor"
+		    android:contentDescription="@string/barcode_image"
+		    android:padding="@dimen/blockPadding"
+		    tools:ignore="ImageContrastCheck" />
+    </LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/dialog_footer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="end"
+		android:paddingStart="14dp"
+		android:paddingEnd="14dp">
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/ok_button_dialog"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:backgroundTint="@color/colorPrimary"
+			android:fontFamily="@font/eukraine_regular"
+			android:text="@string/update_button_ok"
+			android:textColor="@color/whiteColor"
+			android:textSize="@dimen/textButton"
+			app:cornerRadius="@dimen/cornerRadiusSmall"
+			tools:ignore="TouchTargetSizeCheck" />
+	</LinearLayout>
+</LinearLayout>

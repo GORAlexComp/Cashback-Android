@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:padding="@dimen/blockMargin">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:id="@+id/product_update_block"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="7dp"
+			android:orientation="horizontal"
+			tools:ignore="UseCompoundDrawables">
+
+			<ImageView
+				android:id="@+id/product_update_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="7dp"
+				android:contentDescription="@string/updated_icon_desc"
+				android:src="@drawable/ic_update_sync"
+				app:tint="@color/primaryText" />
+
+			<TextView
+				android:id="@+id/product_update_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:fontFamily="@font/eukraine_regular"
+				android:text="@string/updated_products"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textDefault" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/retailer_update_block"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginBottom="7dp"
+			android:orientation="horizontal"
+			tools:ignore="UseCompoundDrawables">
+
+			<ImageView
+				android:id="@+id/retailer_update_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="7dp"
+				android:contentDescription="@string/updated_icon_desc"
+				android:src="@drawable/ic_update_sync"
+				app:tint="@color/primaryText" />
+
+			<TextView
+				android:id="@+id/retailer_update_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:fontFamily="@font/eukraine_regular"
+				android:text="@string/updated_retailers"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textDefault" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<com.google.android.material.button.MaterialButton
+		android:id="@+id/update_button_ok"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="end"
+		android:fontFamily="@font/eukraine_regular"
+		android:text="@string/update_button_ok"
+		android:textColor="@color/whiteColor"
+		android:textSize="@dimen/textButton"
+		app:cornerRadius="@dimen/cornerRadiusSmall" />
+</LinearLayout>

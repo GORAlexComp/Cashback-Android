@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	style="@style/RecyclerViewItemStyle"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:baselineAligned="false"
+	android:orientation="horizontal">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/blockMargin"
+		android:layout_weight="10"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/product_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/eukraine_thin"
+			android:text="@string/product_name"
+			android:textColor="@color/primaryText"
+			android:textSize="@dimen/textDefault"
+			android:textStyle="bold" />
+
+		<TextView
+			android:id="@+id/product_brand"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/eukraine_thin"
+			android:text="@string/product_brand"
+			android:textColor="@color/primaryText"
+			android:textSize="@dimen/textSmall" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:orientation="vertical">
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btn_view_ean"
+			android:layout_width="50dp"
+			android:layout_height="50dp"
+			android:backgroundTint="@color/colorSecondary"
+			android:gravity="center"
+			android:paddingStart="12dp"
+			android:paddingEnd="0dp"
+			android:text="@string/product_barcode"
+			android:textAlignment="inherit"
+			android:textSize="0sp"
+			app:cornerRadius="@dimen/cornerRadiusBig"
+			app:icon="@drawable/ic_barcode"
+			app:iconGravity="start"
+			app:iconSize="26dp"
+			app:iconTint="#fff"
+			tools:ignore="NestedWeights,TextContrastCheck" />
+	</LinearLayout>
+</LinearLayout>

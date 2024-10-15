@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="blackColor">#FF000000</color>
+	<color name="whiteColor">#FFFFFFFF</color>
+	<color name="colorPrimary">#1258EC</color>
+	<color name="colorSecondary">#FFB300</color>
+	<color name="checkOk">#43A047</color>
+	<color name="checkCancel">#E53935</color>
+
+	<color name="revertBlack">@color/whiteColor</color>
+	<color name="revertWhite">@color/blackColor</color>
+
+	<color name="primaryText">#BABABA</color>
+	<color name="primaryTextSecond">#EDEDED</color>
+	<color name="primaryBackground">#0D0D0D</color>
+	<color name="primaryBackgroundSecond">#1C1C1C</color>
+</resources>

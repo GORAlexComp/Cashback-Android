@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.PartnerBankActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbarHeight"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="@dimen/toolbarActionButton"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/app_logo"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/whiteColor" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/eukraine_regular"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:textColor="@color/whiteColor"
+            tools:ignore="RtlHardcoded" />
+    </androidx.appcompat.widget.Toolbar>
+
+	<LinearLayout
+		android:id="@+id/linear_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/blockMargin"
+		android:layout_marginBottom="@dimen/blockMargin"
+		android:orientation="vertical">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/banks_list"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/blockMargin" />
+	</LinearLayout>
+</LinearLayout>

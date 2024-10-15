@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+	<shortcut
+		android:enabled="true"
+		android:icon="@drawable/ic_barcode"
+		android:shortcutId="shortcut_scanner"
+		android:shortcutLongLabel="@string/shortcut_scanner_label_long"
+		android:shortcutShortLabel="@string/shortcut_scanner_label">
+		<intent
+			android:action="android.intent.action.VIEW"
+			android:targetClass="ua.pp.gac.cashback_android.ui.ScannerActivity"
+			android:targetPackage="ua.pp.gac.cashback_android" />
+	</shortcut>
+
+	<shortcut
+		android:enabled="true"
+		android:icon="@drawable/ic_search"
+		android:shortcutId="shortcut_products"
+		android:shortcutLongLabel="@string/shortcut_products_label_long"
+		android:shortcutShortLabel="@string/shortcut_products_label">
+		<intent
+			android:action="android.intent.action.VIEW"
+			android:targetClass="ua.pp.gac.cashback_android.ui.ProductActivity"
+			android:targetPackage="ua.pp.gac.cashback_android" />
+	</shortcut>
+
+	<shortcut
+		android:enabled="true"
+		android:icon="@drawable/ic_retailer"
+		android:shortcutId="shortcut_retailers"
+		android:shortcutLongLabel="@string/shortcut_retailers_label_long"
+		android:shortcutShortLabel="@string/shortcut_retailers_label">
+		<intent
+			android:action="android.intent.action.VIEW"
+			android:targetClass="ua.pp.gac.cashback_android.ui.RetailerActivity"
+			android:targetPackage="ua.pp.gac.cashback_android" />
+	</shortcut>
+</shortcuts>

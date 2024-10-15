@@ -1,0 +1,22 @@
+<resources>
+	<dimen name="toolbarHeight">40dp</dimen>
+	<dimen name="toolbarActionButton">70dp</dimen>
+	<dimen name="blockMargin">10dp</dimen>
+	<dimen name="blockMarginBottom">10dp</dimen>
+	<dimen name="blockPadding">7dp</dimen>
+	<dimen name="blockItemPadding">14dp</dimen>
+
+	<dimen name="textThin">13sp</dimen>
+	<dimen name="textSmall">15sp</dimen>
+	<dimen name="textDefault">16sp</dimen>
+	<dimen name="textBig">18sp</dimen>
+	<dimen name="textButton">18sp</dimen>
+
+	<dimen name="iconSize">30dp</dimen>
+
+	<dimen name="cornerRadiusSmall">10dp</dimen>
+	<dimen name="cornerRadiusNormal">16dp</dimen>
+	<dimen name="cornerRadiusBig">50dp</dimen>
+
+	<dimen name="SearchHeight">50dp</dimen>
+</resources>

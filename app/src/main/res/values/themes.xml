@@ -1,0 +1,18 @@
+<resources>
+	<style name="Theme.CashbackAndroid" parent="Theme.Material3.DayNight.NoActionBar">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="android:windowBackground">@color/primaryBackground</item>
+		<item name="android:statusBarColor">@color/colorPrimary</item>
+		<item name="android:navigationBarColor">@color/colorPrimary</item>
+		<item name="android:alertDialogTheme">@style/Theme.CashbackAndroid.Dialog</item>
+	</style>
+
+	<style name="Theme.CashbackAndroid.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+		<item name="android:windowBackground">@color/primaryBackgroundSecond</item>
+	</style>
+
+	<style name="RecyclerViewItemStyle">
+		<item name="android:background">@color/primaryBackgroundSecond</item>
+		<item name="android:padding">@dimen/blockItemPadding</item>
+	</style>
+</resources>

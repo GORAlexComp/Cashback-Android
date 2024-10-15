@@ -1,0 +1,128 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<string name="app_name">Національний кешбек</string>
+	<string name="app_logo">Логотип проекту</string>
+	<string name="version">"Версія: "</string>
+
+	<string name="button_settings_desc">Кнопка відкриття налаштувань</string>
+	<string name="button_back_desc">Кнопка повернення назад</string>
+
+	<string name="slide_description">Передпоказ для зображення слайдера</string>
+
+	<string name="icon_hello_hand">Іконка Привіт</string>
+	<string name="good_night">Доброї ночі, </string>
+	<string name="good_morning">"Доброго ранку, "</string>
+	<string name="good_day">"Доброго дня, "</string>
+	<string name="good_evening">"Доброго вечора, "</string>
+	<string name="welcome_default">Раді бачити,</string>
+	<string name="welcome_user_default">Користувач!</string>
+
+	<string name="scan_products">Сканувати товари</string>
+	<string name="search_products">Пошук товарів</string>
+	<string name="icon_search_desc">Іконка пошук товарів</string>
+	<string name="retailers">Продавці</string>
+	<string name="icon_retailers_desc">Іконка продавці</string>
+	<string name="rules">Правила участі</string>
+	<string name="icon_rules_desc">Іконка правила участі</string>
+	<string name="favorites">Обрані товари</string>
+	<string name="icon_favorites_desc">Іконка обрані товари</string>
+
+	<string name="project_site">Сайт проекту</string>
+	<string name="bank_partners">Банки учасники</string>
+	<string name="about_app">Про додаток</string>
+
+	<string name="products_count_all">Загальна кількість товарів…</string>
+	<string name="retailers_count_all">Загальна кількість продавців…</string>
+
+	<string name="settings_title">Налаштування</string>
+
+	<string name="flashlight_desc">Кнопка ввімкнення ліхтарика</string>
+	<string name="scan_more">Сканувати ще</string>
+
+	<string name="name_input">Назва:</string>
+	<string name="name">Назва</string>
+	<string name="brand_input">Виробник:</string>
+	<string name="brand">Виробник</string>
+	<string name="updated_at_input">Оновлено:</string>
+	<string name="updated_at">Оновлено</string>
+	<string name="ean">Штрихкод</string>
+
+	<string name="product_find_icon_desc">Іконка, що товар було знайдено</string>
+	<string name="product_find_ok">Товар знайдено!</string>
+	<string name="product_name">Назва товару</string>
+	<string name="product_brand">Виробник</string>
+	<string name="barcode_image">Зображення штрихкоду</string>
+	<string name="product_barcode">Штрихкод</string>
+
+	<string name="retailer_brand_input">Назва мережі або продавця…</string>
+	<string name="retailer_address_input">Адреса точки продажу…</string>
+	<string name="search_retailer_input">Назва мережі або продавця</string>
+	<string name="search_address_input">Адреса точки продажу</string>
+
+	<string name="search_product_input">Назва товару або штрихкод…</string>
+	<string name="search_brand_input">Виробник</string>
+
+	<string name="product_find_cancel">Товар не знайдено!</string>
+	<string name="product_notFind_icon_desc">Іконка, що товар не було знайдено</string>
+
+	<string name="table_count_all">Усього:</string>
+	<string name="table_retailers_all">Усього продавців: </string>
+	<string name="table_products_all">Усього товарів: </string>
+
+	<string name="dialog_title">Заголовок</string>
+
+	<string name="update_button_ok">OK</string>
+	<string name="updated_retailers">Оновлення продавців</string>
+	<string name="updated_products">Оновлення товарів</string>
+	<string name="updated_icon_desc">Іконка оновлення</string>
+	<string name="no_find_updates">Оновлень не знайдено!</string>
+
+	<string name="icon_bank_desc">Логотип банка-партнера</string>
+	<string name="bank_partner_name">Назва банка-партнера</string>
+	<string name="icon_link_desc">Іконка посилання</string>
+
+	<string name="update_tables_button">Оновити дані</string>
+	<string name="settings_economy_mode">Економія трафіку</string>
+	<string name="settings_theme_mode">Тема застосунку</string>
+	<string name="scan_hint" tools:ignore="TypographyEllipsis">Щоб почати сканування, наведіть камеру на штрихкод товару...</string>
+
+	<string name="_0">0</string>
+
+	<string name="icon_info">Іконка інформація</string>
+	<string name="icon_internet">Іконка інтернет мережа</string>
+	<string name="icon_bank">Іконка банк</string>
+
+	<string name="economy_mode_title">Економний режим</string>
+	<string name="yes_button">Так</string>
+	<string name="economy_mode_text">Ви дійсно бажаєте продовжити оновлення через мобільний інтернет?</string>
+	<string name="settings_economy_mode_desc">Попередження, про використання мобільного інтернету</string>
+	<string name="cancel_button">Відміна</string>
+
+	<string name="product_set_favorite">Товар додано в обране!</string>
+	<string name="product_del_favorite">Товар прибрано з обраного!</string>
+
+	<string name="error_get_product_data">Помилка отримання даних товару</string>
+	<string name="error_set_favorite">Помилка додавання в обране!</string>
+	<string name="error_del_favorite">Помилка видалення з обраного!</string>
+	<string name="error_ean_format">Невірний формат штрихкоду</string>
+	<string name="error_start_camera">Неможливо використати камеру</string>
+	<string name="error_start_db">Ой, трапилася помилка: Не вдалося завантажити базу даних!</string>
+	<string name="error_load_slider">Ой, трапилася помилка: Не вдалося завантажити слайдер!</string>
+
+	<string name="widget_search_title">Пошук та сканування</string>
+	<string name="widget_search_desc">Швидкий доступ до сканера та пошуку за товарами і продавцями</string>
+	<!--	<string name="widget_count_title">Заповненість</string>-->
+	<!--	<string name="widget_count_desc">Кількість товарів та продавців у застосунку</string>-->
+
+	<string name="shortcut_scanner_label">Сканувати штрихкод</string>
+	<string name="shortcut_scanner_label_long">Сканувати штрихкод</string>
+	<string name="shortcut_products_label">Шукати товари</string>
+	<string name="shortcut_products_label_long">Пошук за назвою або штрихкодом товару</string>
+	<string name="shortcut_retailers_label">Шукати продавців</string>
+	<string name="shortcut_retailers_label_long">Пошук за продавцем та адресою продажу</string>
+
+	<string-array name="theme_app">
+		<item>Світла</item>
+		<item>Темна</item>
+		<item>Як в системі</item>
+	</string-array>
+</resources>

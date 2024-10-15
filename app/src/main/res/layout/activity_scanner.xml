@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    tools:context=".ui.ScannerActivity">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+	<ImageButton
+		android:id="@+id/flash_button"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		android:layout_marginTop="10dp"
+		android:layout_marginEnd="10dp"
+		android:background="@drawable/button_flashlight"
+		android:contentDescription="@string/flashlight_desc"
+		android:paddingHorizontal="8dp"
+		android:paddingVertical="8dp"
+		android:scaleType="fitCenter"
+		android:src="@drawable/ic_flashlight_on"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_sheet_product"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/preview_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/result_scanner_buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/scanner_start_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/eukraine_thin"
+                    android:gravity="center"
+                    android:text="@string/scan_hint"
+                    android:textColor="@color/primaryText"
+                    android:textSize="@dimen/textSmall" />
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/result_scanner_buttons"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/result_scanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/blockMargin"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        tools:ignore="UseCompoundDrawables">
+
+	                    <ImageView
+		                    android:id="@+id/iv_scan_icon"
+		                    android:layout_width="match_parent"
+		                    android:layout_height="70dp"
+		                    android:contentDescription="@string/product_find_icon_desc"
+		                    android:src="@drawable/ic_check_ok"
+		                    tools:ignore="ImageContrastCheck" />
+
+                        <TextView
+                            android:id="@+id/tv_scan_message"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/eukraine_regular"
+                            android:text="@string/product_find_ok"
+                            android:textColor="@color/primaryText"
+                            android:textSize="@dimen/textBig"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/result_scanner_ok"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/blockMargin"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/blockMargin"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/eukraine_regular"
+                                    android:gravity="right"
+                                    android:paddingEnd="@dimen/blockPadding"
+                                    android:text="@string/name_input"
+                                    android:textColor="@color/primaryText"
+                                    android:textSize="@dimen/textThin"
+                                    android:textStyle="bold"
+                                    tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+                                <TextView
+                                    android:id="@+id/tv_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/eukraine_thin"
+                                    android:text="@string/name"
+                                    android:textColor="@color/primaryText"
+                                    android:textSize="@dimen/textThin" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+	                            <TextView
+		                            android:layout_width="100dp"
+		                            android:layout_height="wrap_content"
+		                            android:fontFamily="@font/eukraine_regular"
+		                            android:gravity="right"
+		                            android:paddingEnd="@dimen/blockPadding"
+		                            android:text="@string/brand_input"
+		                            android:textColor="@color/primaryText"
+		                            android:textSize="@dimen/textThin"
+		                            android:textStyle="bold"
+		                            tools:ignore="RtlHardcoded,RtlSymmetry,TextSizeCheck" />
+
+                                <TextView
+                                    android:id="@+id/tv_brand"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/eukraine_thin"
+                                    android:text="@string/brand"
+                                    android:textColor="@color/primaryText"
+                                    android:textSize="@dimen/textThin" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+	                            <TextView
+		                            android:layout_width="100dp"
+		                            android:layout_height="wrap_content"
+		                            android:fontFamily="@font/eukraine_regular"
+		                            android:gravity="right"
+		                            android:paddingEnd="@dimen/blockPadding"
+		                            android:text="@string/updated_at_input"
+		                            android:textColor="@color/primaryText"
+		                            android:textSize="@dimen/textThin"
+		                            android:textStyle="bold"
+		                            tools:ignore="RtlHardcoded,RtlSymmetry,TextSizeCheck" />
+
+                                <TextView
+                                    android:id="@+id/tv_updated_at"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/eukraine_thin"
+                                    android:text="@string/updated_at"
+                                    android:textColor="@color/primaryText"
+                                    android:textSize="@dimen/textThin" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_barcode"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:layout_marginBottom="@dimen/blockPadding"
+                                android:contentDescription="@string/barcode_image"
+                                android:scaleType="centerInside" />
+
+	                        <TextView
+		                        android:id="@+id/tv_ean"
+		                        android:layout_width="match_parent"
+		                        android:layout_height="wrap_content"
+		                        android:fontFamily="@font/eukraine_regular"
+		                        android:gravity="center"
+		                        android:text="@string/ean"
+		                        android:textColor="@color/primaryText"
+		                        android:textSize="@dimen/textThin"
+		                        android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+	    <LinearLayout
+		    android:id="@+id/result_scanner_buttons"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:gravity="center"
+		    android:orientation="horizontal"
+		    android:visibility="visible"
+		    app:layout_constraintBottom_toBottomOf="parent"
+		    app:layout_constraintEnd_toEndOf="parent"
+		    app:layout_constraintStart_toStartOf="parent">
+
+		    <com.google.android.material.button.MaterialButton
+			    android:id="@+id/btn_scan_again"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:fontFamily="@font/eukraine_regular"
+			    android:minHeight="65dp"
+			    android:text="@string/scan_more"
+			    android:textAlignment="center"
+			    android:textColor="@color/whiteColor"
+			    android:textSize="@dimen/textButton"
+			    app:backgroundTint="@color/colorSecondary"
+			    app:cornerRadius="@dimen/cornerRadiusSmall"
+			    app:icon="@drawable/ic_replay"
+			    app:iconGravity="textStart"
+			    app:iconSize="35sp"
+			    app:iconTint="#fff"
+			    app:tint="@color/whiteColor"
+			    tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+
+		    <com.google.android.material.button.MaterialButton
+			    android:id="@+id/btn_favorite"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="0"
+			    android:fontFamily="@font/eukraine_regular"
+			    android:minHeight="65dp"
+			    android:paddingEnd="15dp"
+			    android:text="@string/favorites"
+			    android:textAlignment="center"
+			    android:textSize="0sp"
+			    android:visibility="visible"
+			    app:backgroundTint="@color/primaryBackgroundSecond"
+			    app:cornerRadius="@dimen/cornerRadiusSmall"
+			    app:icon="@drawable/ic_favorite"
+			    app:iconGravity="textStart"
+			    app:iconSize="35sp"
+			    app:iconTint="@color/checkCancel"
+			    tools:ignore="RtlSymmetry,TextContrastCheck" />
+	    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

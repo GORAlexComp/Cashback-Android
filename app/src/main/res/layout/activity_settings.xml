@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context=".ui.SettingsActivity">
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbarHeight"
+		android:background="@color/colorPrimary"
+		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+		app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+		<ImageButton
+			android:id="@+id/back"
+			android:layout_width="@dimen/toolbarActionButton"
+			android:layout_height="match_parent"
+			android:layout_gravity="start"
+			android:background="@color/colorPrimary"
+			android:contentDescription="@string/app_logo"
+			android:src="@drawable/ic_arrow_back"
+			app:tint="@color/whiteColor" />
+
+		<TextView
+			android:id="@+id/toolbar_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:fontFamily="@font/eukraine_regular"
+			android:text="@string/app_name"
+			android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+			android:textColor="@color/whiteColor" />
+	</androidx.appcompat.widget.Toolbar>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/blockMargin"
+		android:layout_marginBottom="@dimen/blockMargin"
+		android:orientation="vertical"
+		android:padding="@dimen/blockMargin">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/blockMargin"
+			android:orientation="vertical"
+			tools:ignore="UselessParent">
+
+			<TextView
+				android:id="@+id/te_theme_app_head"
+				android:layout_width="wrap_content"
+				android:layout_height="25dp"
+				android:layout_weight="1"
+				android:fontFamily="@font/eukraine_regular"
+				android:gravity="center_vertical"
+				android:labelFor="@id/spinner_theme_app"
+				android:text="@string/settings_theme_mode"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textSmall"
+				tools:ignore="TextSizeCheck" />
+
+			<Spinner
+				android:id="@+id/spinner_theme_app"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/SearchHeight"
+				android:layout_weight="1"
+				android:fontFamily="@font/eukraine_thin"
+				android:minHeight="48dp"
+				android:textColor="@color/revertBlack"
+				android:textSize="@dimen/textBig" />
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginBottom="@dimen/blockMargin"
+			android:background="@android:drawable/divider_horizontal_textfield" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/blockMargin"
+			android:orientation="vertical"
+			tools:ignore="UselessParent">
+
+			<com.google.android.material.materialswitch.MaterialSwitch
+				android:id="@+id/switch_save_net"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_marginBottom="@dimen/blockMarginBottom"
+				android:layout_weight="1"
+				android:fontFamily="@font/eukraine_regular"
+				android:text="@string/settings_economy_mode"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textSmall"
+				tools:ignore="VisualLintButtonSize,TouchTargetSizeCheck" />
+
+			<TextView
+				android:id="@+id/textView"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:fontFamily="@font/eukraine_thin"
+				android:text="@string/settings_economy_mode_desc"
+				android:textColor="@color/primaryTextSecond"
+				android:textSize="@dimen/textThin"
+				tools:ignore="TextContrastCheck" />
+		</LinearLayout>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginBottom="@dimen/blockMargin"
+			android:background="@android:drawable/divider_horizontal_textfield" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/btn_update_contents"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:backgroundTint="@color/colorPrimary"
+				android:enabled="true"
+				android:fontFamily="@font/eukraine_regular"
+				android:minHeight="48dp"
+				android:text="@string/update_tables_button"
+				android:textColor="@color/whiteColor"
+				android:textSize="@dimen/textButton"
+				app:cornerRadius="@dimen/cornerRadiusSmall"
+				tools:ignore="VisualLintButtonSize" />
+		</LinearLayout>
+	</LinearLayout>
+</LinearLayout>

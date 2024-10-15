@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/colorPrimary"
+	tools:context=".ui.SplashActivity"
+	tools:ignore="Overdraw">
+
+	<LinearLayout
+		android:id="@+id/splash_head"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="32dp"
+		android:foregroundGravity="center"
+		android:gravity="center"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toTopOf="@id/version"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="0dp"
+			android:layout_gravity="center"
+			android:layout_weight="1"
+			android:foregroundGravity="center"
+			android:gravity="center"
+			android:orientation="vertical"
+			tools:ignore="UselessParent">
+
+			<ImageView
+				android:id="@+id/splash_logo"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_marginHorizontal="48dp"
+				android:layout_weight="1"
+				android:contentDescription="@string/app_logo"
+				android:src="@drawable/logo_white"
+				tools:ignore="NestedWeights" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/version"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="32dp"
+		android:fontFamily="@font/eukraine_regular"
+		android:textColor="@color/whiteColor"
+		android:gravity="bottom"
+		android:text="@string/version"
+		android:textSize="@dimen/textDefault"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

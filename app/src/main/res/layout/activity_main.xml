@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context=".ui.MainActivity">
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbarHeight"
+		android:background="@color/colorPrimary"
+		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+		app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+		<ImageButton
+			android:id="@+id/btn_settings"
+			android:layout_width="@dimen/toolbarActionButton"
+			android:layout_height="match_parent"
+			android:layout_gravity="end"
+			android:background="@color/colorPrimary"
+			android:contentDescription="@string/button_settings_desc"
+			android:src="@drawable/ic_settings"
+			app:tint="@color/whiteColor" />
+	</androidx.appcompat.widget.Toolbar>
+
+	<RelativeLayout
+		android:id="@+id/logo_block"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/logo_main_shadow">
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="1dp"
+			android:background="@drawable/logo_main">
+
+			<ImageView
+				android:id="@+id/imageView"
+				android:layout_width="match_parent"
+				android:layout_height="80dp"
+				android:contentDescription="@string/app_logo"
+				android:paddingLeft="25dp"
+				android:paddingRight="25dp"
+				android:paddingBottom="25dp"
+				android:src="@drawable/logo_white" />
+		</RelativeLayout>
+	</RelativeLayout>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/blockMargin"
+		android:gravity="center"
+		android:scrollbarSize="0dp">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginTop="@dimen/blockMargin"
+				android:layout_marginBottom="@dimen/blockMarginBottom"
+				android:background="@drawable/button_menu"
+				android:backgroundTint="@color/primaryBackgroundSecond"
+				android:backgroundTintMode="src_atop"
+				android:gravity="center_vertical"
+				android:orientation="horizontal"
+				android:padding="@dimen/blockPadding">
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:orientation="vertical">
+
+					<ImageView
+						android:layout_width="50dp"
+						android:layout_height="0dp"
+						android:layout_marginEnd="15dp"
+						android:layout_weight="1"
+						android:contentDescription="@string/icon_hello_hand"
+						app:srcCompat="@drawable/hello_hand"
+						tools:ignore="ImageContrastCheck" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/welcome_msg"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/eukraine_thin"
+						android:text="@string/welcome_default"
+						android:textColor="@color/primaryText"
+						android:textSize="@dimen/textDefault" />
+
+					<TextView
+						android:id="@+id/username"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:fontFamily="@font/eukraine_thin"
+						android:text="@string/welcome_user_default"
+						android:textColor="@color/primaryText"
+						android:textSize="@dimen/textDefault" />
+				</LinearLayout>
+			</LinearLayout>
+
+			<com.smarteist.autoimageslider.SliderView
+				android:id="@+id/slider_view"
+				android:layout_width="match_parent"
+				android:layout_height="150dp"
+				android:layout_marginBottom="@dimen/blockMarginBottom"
+				app:sliderAutoCycleDirection="right"
+				app:sliderAutoCycleEnabled="true"
+				app:sliderIndicatorAnimationDuration="0"
+				app:sliderIndicatorGravity="bottom|center_horizontal"
+				app:sliderScrollTimeInSec="5" />
+
+			<com.google.android.material.button.MaterialButton
+				android:id="@+id/btn_open_scanner"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/blockMarginBottom"
+				android:backgroundTint="@color/colorPrimary"
+				android:fontFamily="@font/eukraine_regular"
+				android:minHeight="65dp"
+				android:text="@string/scan_products"
+				android:textColor="@color/whiteColor"
+				android:textSize="@dimen/textButton"
+				app:cornerRadius="@dimen/cornerRadiusSmall"
+				app:icon="@drawable/ic_barcode"
+				app:iconGravity="textStart"
+				app:iconSize="35sp"
+				app:iconTint="#fff"
+				tools:ignore="VisualLintButtonSize" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginBottom="@dimen/blockMarginBottom"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="3dp"
+					android:baselineAligned="false"
+					android:orientation="horizontal">
+
+					<LinearLayout
+						android:id="@+id/btn_product"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_gravity="left"
+						android:layout_marginRight="1.5dp"
+						android:layout_weight="1"
+						android:background="@drawable/button_menu"
+						android:orientation="vertical"
+						android:paddingHorizontal="12dp"
+						android:paddingVertical="7dp"
+						tools:ignore="RtlHardcoded">
+
+						<ImageView
+							android:layout_width="@dimen/iconSize"
+							android:layout_height="0dp"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_search_desc"
+							android:foregroundGravity="left"
+							android:paddingBottom="3dp"
+							android:src="@drawable/ic_search"
+							app:tint="@color/revertWhite"
+							tools:ignore="NestedWeights,ImageContrastCheck" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/search_products"
+							android:textColor="@color/revertWhite"
+							android:textSize="@dimen/textThin"
+							tools:ignore="TextContrastCheck" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/btn_rules"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="left"
+						android:layout_marginStart="1.5dp"
+						android:layout_weight="1"
+						android:background="@drawable/button_menu"
+						android:orientation="vertical"
+						android:paddingHorizontal="12dp"
+						android:paddingVertical="7dp"
+						tools:ignore="RtlHardcoded">
+
+						<ImageView
+							android:layout_width="@dimen/iconSize"
+							android:layout_height="0dp"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_rules_desc"
+							android:foregroundGravity="left"
+							android:paddingBottom="3dp"
+							android:src="@drawable/ic_rules"
+							app:tint="@color/revertWhite"
+							tools:ignore="NestedWeights,ImageContrastCheck" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/rules"
+							android:textColor="@color/revertWhite"
+							android:textSize="@dimen/textThin"
+							tools:ignore="TextContrastCheck" />
+					</LinearLayout>
+				</LinearLayout>
+
+				<LinearLayout
+					style="?android:attr/buttonBarStyle"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:baselineAligned="false"
+					android:orientation="horizontal">
+
+					<LinearLayout
+						android:id="@+id/btn_retailer"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="left"
+						android:layout_marginRight="1.5dp"
+						android:layout_weight="1"
+						android:background="@drawable/button_menu"
+						android:orientation="vertical"
+						android:paddingHorizontal="12dp"
+						android:paddingVertical="7dp"
+						tools:ignore="RtlHardcoded">
+
+						<ImageView
+							android:layout_width="30dp"
+							android:layout_height="0dp"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_retailers_desc"
+							android:foregroundGravity="left"
+							android:paddingBottom="3dp"
+							android:src="@drawable/ic_retailer"
+							app:tint="@color/revertWhite"
+							tools:ignore="NestedWeights,ImageContrastCheck" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/retailers"
+							android:textColor="@color/revertWhite"
+							android:textSize="@dimen/textThin"
+							tools:ignore="TextContrastCheck" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/btn_favorite"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="left"
+						android:layout_marginLeft="1.5dp"
+						android:layout_weight="1"
+						android:background="@drawable/button_menu"
+						android:orientation="vertical"
+						android:paddingHorizontal="12dp"
+						android:paddingVertical="7dp"
+						tools:ignore="RtlHardcoded">
+
+						<ImageView
+							android:layout_width="30dp"
+							android:layout_height="0dp"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_favorites_desc"
+							android:foregroundGravity="left"
+							android:paddingBottom="3dp"
+							android:src="@drawable/ic_favorite"
+							app:tint="@color/revertWhite"
+							tools:ignore="NestedWeights,ImageContrastCheck" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/favorites"
+							android:textColor="@color/revertWhite"
+							android:textSize="@dimen/textThin"
+							tools:ignore="TextContrastCheck" />
+					</LinearLayout>
+				</LinearLayout>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_marginBottom="@dimen/blockMargin"
+				android:orientation="vertical">
+
+				<LinearLayout
+					android:id="@+id/bank_partners"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginBottom="3dp"
+					android:background="@color/primaryBackgroundSecond"
+					android:orientation="horizontal"
+					android:paddingStart="@dimen/blockPadding"
+					android:paddingTop="@dimen/blockPadding"
+					android:paddingEnd="@dimen/blockPadding"
+					android:paddingBottom="@dimen/blockPadding">
+
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
+
+						<ImageView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_bank"
+							app:srcCompat="@drawable/ic_bank"
+							app:tint="@color/primaryText" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_marginStart="10dp"
+						android:gravity="center_vertical"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/bank_partners"
+							android:textColor="@color/primaryText"
+							android:textSize="@dimen/textThin" />
+					</LinearLayout>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/project_site"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginBottom="3dp"
+					android:background="@color/primaryBackgroundSecond"
+					android:orientation="horizontal"
+					android:paddingStart="@dimen/blockPadding"
+					android:paddingTop="@dimen/blockPadding"
+					android:paddingEnd="@dimen/blockPadding"
+					android:paddingBottom="@dimen/blockPadding">
+
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
+
+						<ImageView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_internet"
+							app:srcCompat="@drawable/ic_web"
+							app:tint="@color/primaryText" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_marginStart="10dp"
+						android:gravity="center_vertical"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/project_site"
+							android:textColor="@color/primaryText"
+							android:textSize="@dimen/textThin" />
+					</LinearLayout>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/about_app"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="@color/primaryBackgroundSecond"
+					android:orientation="horizontal"
+					android:paddingStart="@dimen/blockPadding"
+					android:paddingTop="@dimen/blockPadding"
+					android:paddingEnd="@dimen/blockPadding"
+					android:paddingBottom="@dimen/blockPadding">
+
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:orientation="horizontal">
+
+						<ImageView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:contentDescription="@string/icon_info"
+							app:srcCompat="@drawable/ic_info"
+							app:tint="@color/primaryText" />
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:layout_marginStart="10dp"
+						android:gravity="center_vertical"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:fontFamily="@font/eukraine_regular"
+							android:text="@string/about_app"
+							android:textColor="@color/primaryText"
+							android:textSize="@dimen/textThin" />
+					</LinearLayout>
+				</LinearLayout>
+			</LinearLayout>
+
+			<TextView
+				android:id="@+id/products_count_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="5dp"
+				android:fontFamily="@font/eukraine_regular"
+				android:text="@string/products_count_all"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textSmall" />
+
+			<TextView
+				android:id="@+id/retailers_count_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/blockMargin"
+				android:fontFamily="@font/eukraine_regular"
+				android:text="@string/retailers_count_all"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textSmall" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

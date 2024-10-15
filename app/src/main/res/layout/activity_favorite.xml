@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context=".ui.FavoriteActivity">
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbarHeight"
+		android:background="@color/colorPrimary"
+		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+		app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+		<ImageButton
+			android:id="@+id/back"
+			android:layout_width="@dimen/toolbarActionButton"
+			android:layout_height="match_parent"
+			android:layout_gravity="start"
+			android:background="@color/colorPrimary"
+			android:contentDescription="@string/app_logo"
+			android:src="@drawable/ic_arrow_back"
+			app:tint="@color/whiteColor" />
+
+		<TextView
+			android:id="@+id/toolbar_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:fontFamily="@font/eukraine_regular"
+			android:text="@string/app_name"
+			android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+			android:textColor="@color/whiteColor" />
+	</androidx.appcompat.widget.Toolbar>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/blockMargin"
+		android:layout_marginBottom="@dimen/blockMargin"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginTop="@dimen/blockMargin"
+			android:layout_marginBottom="@dimen/blockMarginBottom"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:fontFamily="@font/eukraine_regular"
+				android:paddingEnd="@dimen/blockPadding"
+				android:text="@string/table_count_all"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textThin"
+				android:textStyle="bold"
+				tools:ignore="RtlSymmetry" />
+
+			<TextView
+				android:id="@+id/favorite_count"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:fontFamily="@font/eukraine_regular"
+				android:text="@string/_0"
+				android:textColor="@color/primaryText"
+				android:textSize="@dimen/textThin" />
+		</LinearLayout>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/favorite_list"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1" />
+	</LinearLayout>
+</LinearLayout>

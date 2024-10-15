@@ -1,24 +1,45 @@
-# Compiled class file
+*.aar
+*.ap_
+*.apk
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
+*.der
+*.dex
 *.ear
-*.zip
-*.tar.gz
+*.iml
+*.jar
+*.jks
+*.keystore
+*.lock
+*.log
+*.nar
+*.out
+*.pem
+*.plist
 *.rar
+*.so
+*.tar.gz
+*.tmp
+*.war
+*.zip
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+.DS_Store
+.externalNativeBuild
+
+google-services.json
+/app/google-services.json
+/local.properties
+/secrets.properties
+
+.cxx/
+.idea/
+.gradle/
+.mtj.tmp/
+coverage/
+/build/
+*/build/
+/captures
+

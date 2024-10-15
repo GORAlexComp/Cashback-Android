@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/primaryBackground"
+	android:baselineAligned="false"
+	android:orientation="horizontal"
+	android:paddingHorizontal="@dimen/blockPadding"
+	android:paddingVertical="@dimen/blockPadding">
+
+	<LinearLayout
+		android:id="@+id/scanner_block"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:orientation="vertical"
+		tools:ignore="UseCompoundDrawables">
+
+		<ImageButton
+			android:id="@+id/open_scanner"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_marginHorizontal="5dp"
+			android:background="@drawable/button_menu"
+			android:backgroundTint="@color/colorPrimary"
+			android:paddingVertical="5dp"
+			android:src="@drawable/ic_barcode"
+			app:tint="@color/whiteColor"
+			tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintButtonSize" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/products_block"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:orientation="vertical"
+		tools:ignore="UseCompoundDrawables">
+
+		<ImageButton
+			android:id="@+id/open_products"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_marginHorizontal="5dp"
+			android:background="@drawable/button_menu"
+			android:backgroundTint="@color/colorSecondary"
+			android:paddingVertical="5dp"
+			android:src="@drawable/ic_search"
+			app:tint="@color/whiteColor"
+			tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintButtonSize,ImageContrastCheck" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/retailers_block"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:orientation="vertical"
+		tools:ignore="UseCompoundDrawables">
+
+		<ImageButton
+			android:id="@+id/open_retailers"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_marginHorizontal="5dp"
+			android:background="@drawable/button_menu"
+			android:backgroundTint="@color/colorSecondary"
+			android:paddingVertical="5dp"
+			android:src="@drawable/ic_retailer"
+			app:tint="@color/whiteColor"
+			tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintButtonSize,ImageContrastCheck" />
+	</LinearLayout>
+</LinearLayout>
