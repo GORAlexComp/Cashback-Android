@@ -16,6 +16,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      commiturl: ${{ github.event.head_commit.url }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -69,23 +75,18 @@ jobs:
         name: app-release.apk
         path: app/build/outputs/apk/release/app-release.apk
 
-    - name: Get commit URL
-      run: echo "commiturl=${{ github.event.head_commit.url }}" >> $GITHUB_ENV
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: v${{ env.VERSION_NAME }}
-        release_name: Release v${{ env.VERSION_NAME }}
+        tag_name: v$VERSION_NAME
+        release_name: Release v$VERSION_NAME
         body: |
-          Release for version v${{ env.VERSION_NAME }}
+          Release for version v$VERSION_NAME
 
-          [Commit link](${{ env.commiturl }})
+          [Commit link]($commiturl)
         draft: true
         prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Upload APK to Release
       uses: actions/upload-release-asset@v1
@@ -94,8 +95,6 @@ jobs:
         asset_path: app/build/outputs/apk/release/app-release.apk
         asset_name: app-release.apk
         asset_content_type: application/vnd.android.package-archive
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Check if APK exists
       run: |
@@ -111,24 +110,18 @@ jobs:
     - name: Send APK to Telegram
       if: ${{ success() }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        APK_PATH: $(realpath app/build/outputs/apk/release/app-release.apk)
       run: |
-        APK_PATH=$(realpath app/build/outputs/apk/release/app-release.apk)
         curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
         -F chat_id=$TELEGRAM_CHANNEL_ID \
-        -F document=@${APK_PATH} \
-        -F caption="✅ *Нова версія застосунку* v${{ env.VERSION_NAME }} успішно зібрана!\n\n🏷 *Комміт*: [${{ env.commiturl }}](${{ env.commiturl }})" \
+        -F document=$APK_PATH \
+        -F caption="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\n🏷 *Комміт*: [$commiturl]($commiturl)" \
         -F parse_mode="Markdown"
 
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
-      env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
       run: |
         curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
         -d chat_id=$TELEGRAM_CHANNEL_ID \
-        -d text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${{ env.VERSION_NAME }}!" \
+        -d text="❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!" \
         -d parse_mode="Markdown"
