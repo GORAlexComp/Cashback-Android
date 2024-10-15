@@ -47,6 +47,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
+    - name: Upload google-services.json
+      run: |
+        echo "$FIREBASE_CONFIG" > $GITHUB_WORKSPACE/app/google-services.json
+      env:
+        FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+
     - name: Grant execution permissions for gradlew
       run: chmod +x ./gradlew
 
