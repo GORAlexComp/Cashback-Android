@@ -13,9 +13,6 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Grant execution permissions for gradlew
-      run: chmod +x ./gradlew
-
     - name: Get Previous Version Name
       id: previous_version
       run: |
@@ -46,6 +43,9 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
+
+    - name: Grant execution permissions for gradlew
+      run: chmod +x ./gradlew
 
     - name: Build APK
       run: ./gradlew assembleRelease
