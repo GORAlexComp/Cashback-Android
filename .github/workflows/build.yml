@@ -106,7 +106,7 @@ jobs:
         fi
 
     - name: Grant execution permissions for app-release.apk
-      run: chmod 755 app/build/outputs/apk/release/app-release.apk
+      run: chmod +r app/build/outputs/apk/release/app-release.apk
 
     - name: Send APK to Telegram
       if: ${{ success() }}
@@ -115,7 +115,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
       run: |
-        APK_PATH="app/build/outputs/apk/release/app-release.apk"
+        APK_PATH=$(realpath app/build/outputs/apk/release/app-release.apk)
         curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
         -F chat_id=$TELEGRAM_CHANNEL_ID \
         -F document=@${APK_PATH} \
