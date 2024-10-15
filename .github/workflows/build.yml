@@ -113,10 +113,9 @@ jobs:
         APK_PATH: $(realpath app/build/outputs/apk/release/app-release.apk)
       run: |
         curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
-        -F chat_id=$TELEGRAM_CHANNEL_ID \
-        -F document=$APK_PATH \
-        -F caption="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\n🏷 *Комміт*: [$commiturl]($commiturl)" \
-        -F parse_mode="Markdown"
+        --data-binary chat_id=$TELEGRAM_CHANNEL_ID \
+        --data-binary document=$APK_PATH \
+        --data-binary caption="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\n🏷 *Комміт*: [$commiturl]($commiturl)"
 
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
