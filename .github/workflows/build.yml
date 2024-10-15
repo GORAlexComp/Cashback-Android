@@ -2,17 +2,19 @@ name: Android Build
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'app/version.properties'
   workflow_dispatch:
+    branches:
+      - main
     paths:
       - 'app/version.properties'  
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      commiturl: ${{ github.event.head_commit.url }}
 
     steps:
     - name: Checkout Repository
@@ -67,6 +69,9 @@ jobs:
         name: app-release.apk
         path: app/build/outputs/apk/release/app-release.apk
 
+    - name: Get commit URL
+      run: echo "commiturl=${{ github.event.head_commit.url }}" >> $GITHUB_ENV
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -92,8 +97,16 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Check if APK exists
+      run: |
+        if [ -f app/build/outputs/apk/release/app-release.apk ]; then
+          echo "APK found"
+        else
+          echo "APK not found" && exit 1
+        fi
+
     - name: Grant execution permissions for app-release.apk
-      run: chmod +rw app/build/outputs/apk/release/app-release.apk
+      run: chmod 755 app/build/outputs/apk/release/app-release.apk
 
     - name: Send APK to Telegram
       if: ${{ success() }}
@@ -102,10 +115,11 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
       run: |
+        APK_PATH="app/build/outputs/apk/release/app-release.apk"
         curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
         -F chat_id=$TELEGRAM_CHANNEL_ID \
-        -F document=@app/build/outputs/apk/release/app-release.apk \
-        -F caption="✅ *Нова версія застосунку* v${{ env.VERSION_NAME }} успішно зібрана!\n\n🏷 *Комміт*: ${{ env.commiturl}}" \
+        -F document=@${APK_PATH} \
+        -F caption="✅ *Нова версія застосунку* v${{ env.VERSION_NAME }} успішно зібрана!\n\n🏷 *Комміт*: [${{ env.commiturl }}](${{ env.commiturl }})" \
         -F parse_mode="Markdown"
 
     - name: Notify Telegram on Failure
@@ -116,5 +130,5 @@ jobs:
       run: |
         curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
         -d chat_id=$TELEGRAM_CHANNEL_ID \
-        -d text="❌ *Трапилась помилка* під час збірки нової версії застосунку* v${{ env.VERSION_NAME }}!" \
+        -d text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${{ env.VERSION_NAME }}!" \
         -d parse_mode="Markdown"
