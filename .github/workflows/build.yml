@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    commiturl: ${{ github.event.head_commit.url }}
 
     steps:
     - name: Checkout Repository
@@ -70,11 +71,11 @@ jobs:
       uses: actions/create-release@v1
       with:
         tag_name: v${{ steps.version.outputs.VERSION_NAME }}
-        release_name: Release v${{ steps.version.outputs.VERSION_NAME }}
+        release_name: Release v${{ env.VERSION_NAME }}
         body: |
-          Release for version v${{ steps.version.outputs.VERSION_NAME }}
+          Release for version v${{ env.VERSION_NAME }}
 
-          [Commit link](${{ github.event.head_commit.url }})
+          [Commit link](${{ env.commiturl }})
         draft: true
         prerelease: false
       env:
@@ -91,24 +92,31 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Notify Telegram on Success
-      if: ${{ success() }}
+      if: ${{ failure() }}
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
-        GITHUB_COMMIT_URL: ${{ github.event.head_commit.url }}
         VERSION_NAME: ${{ env.VERSION_NAME }}
       run: |
-        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
+        curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage \
         -d chat_id=$TELEGRAM_CHANNEL_ID \
-        -d text="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\nКомміт: $GITHUB_COMMIT_URL"
+        -d text="❌ *Трапилась помилка* під час збірки нової версії застосунку* v$VERSION_NAME!" \
+        -d parse_mode="Markdown"
+
+    - name: Grant execution permissions for app-release.apk
+      run: chmod +r app/build/outputs/apk/release/app-release.apk
 
     - name: Send APK to Telegram
       if: ${{ success() }}
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+        GITHUB_COMMIT_URL: ${{ env.commiturl }}
+        VERSION_NAME: ${{ env.VERSION_NAME }}
       run: |
-        curl -s -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
+        curl -v -X POST https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument \
         -F chat_id=$TELEGRAM_CHANNEL_ID \
-        -F document=@app/build/outputs/apk/release/app-release.apk \
-        -F caption="v$VERSION_NAME – Зібрана версія"
+        -F document="@app/build/outputs/apk/release/app-release.apk" \
+        -F caption="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\n🏷 *Комміт*: $GITHUB_COMMIT_URL" \
+        -F parse_mode="Markdown"
