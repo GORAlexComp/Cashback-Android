@@ -7,7 +7,6 @@
 *.dex
 *.ear
 *.iml
-*.jar
 *.jks
 *.keystore
 *.lock
