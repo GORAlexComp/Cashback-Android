@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'app/version.properties'
+  workflow_dispatch:
+    paths:
+      - 'app/version.properties'  
 
 jobs:
   build:
