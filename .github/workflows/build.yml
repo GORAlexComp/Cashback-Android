@@ -103,7 +103,7 @@ jobs:
       if: ${{ success() }}
       run: |
         APK_PATH=app/build/outputs/apk/release/app-release.apk
-        http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
+        http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
           document@"$APK_PATH" \
           caption="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\n🏷 *Комміт*: [$commiturl]($commiturl)\n📝 *Що змінилося*: ${{ github.event.release.html_url }}" \
@@ -112,7 +112,7 @@ jobs:
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
       run: |
-        http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
+        http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
           message="❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!" \
           parse_mode="Markdown"
