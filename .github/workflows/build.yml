@@ -69,11 +69,27 @@ jobs:
     - name: Build APK
       run: ./gradlew assembleRelease
 
+    - name: Restore Keystore
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > cashback.keystore
+
+    - name: Sign APK
+      run: |
+        APK_PATH=app/build/outputs/apk/release/app-release.apk
+        SIGNED_APK_PATH=app/build/outputs/apk/release/app-release-signed.apk
+
+        apksigner sign --ks cashback.keystore \
+          --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} \
+          --key-pass pass:${{ secrets.KEY_PASSWORD }} \
+          --out $SIGNED_APK_PATH $APK_PATH
+
+        apksigner verify $SIGNED_APK_PATH
+
     - name: Upload APK to Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: app-release.apk
-        path: app/build/outputs/apk/release/app-release.apk
+        path: app/build/outputs/apk/release/app-release-signed.apk
 
     - name: Create Release
       id: create_release
@@ -92,8 +108,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: app/build/outputs/apk/release/app-release.apk
-        asset_name: app-release.apk
+        asset_path: app/build/outputs/apk/release/app-release-signed.apk
+        asset_name: app-release-signed.apk
         asset_content_type: application/vnd.android.package-archive
 
     - name: Install HTTPie
@@ -102,11 +118,11 @@ jobs:
     - name: Send APK to Telegram
       if: ${{ success() }}
       env:
-        APK_PATH: app/build/outputs/apk/release/app-release.apk
+        APK_PATH: app/build/outputs/apk/release/app-release-signed.apk
         RELEASE_URL: "https://github.com/GORAlexComp/Cashback-Android/commits/v${{ env.VERSION_NAME }}"
       run: |
         CAPTION="✅ *Нова версія застосунку* v${{ env.VERSION_NAME }} успішно зібрана!  
-           
+
           🏷 *Комміт*: [${{ env.COMMIT_URL }}](${{ env.COMMIT_URL }})  
           📝 *Що змінилося*: [${{ env.RELEASE_URL }}](${{ env.RELEASE_URL }})  
 
