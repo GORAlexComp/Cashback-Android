@@ -98,9 +98,11 @@ jobs:
         tag_name: v${{ env.VERSION_NAME }}
         release_name: Release v${{ env.VERSION_NAME }}
         body: |
-          Release for version v${{ env.VERSION_NAME }}
+          Release for version v${{ env.VERSION_NAME }}  
 
-          [Commit](${{ env.commiturl }})
+          [Commit](${{ env.COMMIT_URL }})  
+
+          Full Changelog: [https://github.com/GORAlexComp/Cashback-Android/commits/v${{ env.VERSION_NAME }}](https://github.com/GORAlexComp/Cashback-Android/commits/v${{ env.VERSION_NAME }})
         draft: true
         prerelease: false
 
