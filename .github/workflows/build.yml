@@ -106,13 +106,13 @@ jobs:
         RELEASE_URL: "https://github.com/GORAlexComp/Cashback-Android/commits/v${{ env.VERSION_NAME }}"
       run: |
         CAPTION=$(cat <<EOF
-✅ *Нова версія застосунку* v${{ env.VERSION_NAME }} успішно зібрана!
+          ✅ *Нова версія застосунку* v${{ env.VERSION_NAME }} успішно зібрана!
 
-🏷 *Комміт*: [${ COMMIT_URL }](${ COMMIT_URL })
-📝 *Що змінилося*: [${ RELEASE_URL }](${ RELEASE_URL })
+          🏷 *Комміт*: [${ COMMIT_URL }](${ COMMIT_URL })
+          📝 *Що змінилося*: [${ RELEASE_URL }](${ RELEASE_URL })
 
-#Android #apk
-EOF
+          #Android #apk
+          EOF
         )
 
         http --ignore-stdin --form POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
