@@ -110,7 +110,7 @@ jobs:
     - name: Send APK to Telegram
       if: ${{ success() }}
       uses: appleboy/telegram-action@v1.0.0
-      wirh:
+      with:
         to: $TELEGRAM_CHANNEL_ID
         token: $TELEGRAM_BOT_TOKEN
         message: |
@@ -124,7 +124,7 @@ jobs:
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
       uses: appleboy/telegram-action@v1.0.0
-      wirh:
+      with:
         to: $TELEGRAM_CHANNEL_ID
         token: $TELEGRAM_BOT_TOKEN
         message: |
