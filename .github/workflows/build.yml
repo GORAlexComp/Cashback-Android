@@ -66,6 +66,13 @@ jobs:
     - name: Grant execution permissions for gradlew
       run: chmod +x ./gradlew
 
+    - name: Install Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-level: 34
+        build-tools: 34.0.0
+        target: default
+
     - name: Build APK
       run: ./gradlew assembleRelease
 
@@ -78,7 +85,7 @@ jobs:
         APK_PATH=app/build/outputs/apk/release/app-release.apk
         SIGNED_APK_PATH=app/build/outputs/apk/release/app-release-signed.apk
 
-        apksigner sign --ks cashback.keystore \
+        $ANDROID_HOME/build-tools/34.0.0/apksigner sign --ks cashback.keystore \
           --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} \
           --key-pass pass:${{ secrets.KEY_PASSWORD }} \
           --out $SIGNED_APK_PATH $APK_PATH
