@@ -117,7 +117,7 @@ jobs:
           document@"$APK_PATH" \
           caption="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\!\n\n🏷 *Комміт*: \[${COMMIT_URL}\]\(${COMMIT_URL}\)\n📝 *Що змінилося*: \[${RELEASE_URL}\]\(${RELEASE_URL}\)" \
           parse_mode="MarkdownV2"
-          link_preview_options={"is_disabled":true}
+          link_preview_options=\{"is_disabled":true\}
           
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
