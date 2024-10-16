@@ -101,9 +101,8 @@ jobs:
 
     - name: Send APK to Telegram
       if: ${{ success() }}
-      env:
-        APK_PATH: app/build/outputs/apk/release/app-release.apk
       run: |
+        APK_PATH=app/build/outputs/apk/release/app-release.apk
         RELEASE_URL="https://github.com/GORAlexComp/Cashback-Android/commits/v${VERSION_NAME}"
 
         http --ignore-stdin -F POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
