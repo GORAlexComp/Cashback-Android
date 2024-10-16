@@ -102,25 +102,21 @@ jobs:
     - name: Send APK to Telegram
       if: ${{ success() }}
       run: |
-        APK_PATH=app/build/outputs/apk/release/app-release.apk
+        APK_PATH="app/build/outputs/apk/release/app-release.apk"
 
         escape_markdown() {
           echo "$1" | sed -E 's/([_*[\](){}~`>#+\-\.|])/\\\1/g'
         }
 
         VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
-        COMMIT_URL=$(escape_markdown "${{ env.commiturl }}")
-        RELEASE_URL=$(escape_markdown "${{ github.event.release.html_url }}")
+        COMMIT_URL=$(escape_markdown "${{ secrets.commiturl }}")
 
-        echo "VERSION_NAME: ${{ env.VERSION_NAME }}"
-        echo "COMMIT_URL: ${{ env.commiturl }}"
-
-        http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
-          chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
-          document@"$APK_PATH" \
-          caption="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\!\n\n🏷 *Комміт*: \[${COMMIT_URL}\]\(${COMMIT_URL}\)\n📝 *Що змінилося*: \[${RELEASE_URL}\]\(${RELEASE_URL}\)" \
+        http --ignore-stdin --form POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
+          chat_id="${{ secrets.TELEGRAM_CHANNEL_ID }}" \
+          document=@"$APK_PATH" \
+          caption="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\!\n\n🏷 *Комміт*: [${COMMIT_URL}](${COMMIT_URL})\n📝 *Що змінилося*: [${RELEASE_URL}](${RELEASE_URL})" \
+          link_preview_options={"is_disabled":true} \
           parse_mode="MarkdownV2"
-          link_preview_options={"is_disabled":true}
           
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
