@@ -112,6 +112,9 @@ jobs:
         COMMIT_URL=$(escape_markdown "${{ env.commiturl }}")
         RELEASE_URL=$(escape_markdown "${{ github.event.release.html_url }}")
 
+        echo "VERSION_NAME: ${{ env.VERSION_NAME }}"
+        echo "COMMIT_URL: ${{ env.commiturl }}"
+
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
           document@"$APK_PATH" \
