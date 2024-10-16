@@ -102,7 +102,7 @@ jobs:
     - name: Send APK to Telegram
       if: ${{ success() }}
       env:
-        APK_PATH: $(pwd)/app/build/outputs/apk/release/app-release.apk
+        APK_PATH: app/build/outputs/apk/release/app-release.apk
       run: |
         RELEASE_URL="https://github.com/GORAlexComp/Cashback-Android/commits/v${VERSION_NAME}"
 
