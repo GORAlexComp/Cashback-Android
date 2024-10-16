@@ -6,7 +6,11 @@ on:
       - main
     paths:
       - 'app/version.properties'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    branches:
+      - main
+    paths:
+      - 'app/version.properties'  
 
 jobs:
   build:
@@ -74,14 +78,14 @@ jobs:
 
     - name: Restore Keystore
       run: |
-        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > cashback.keystore
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > cashback.p12
 
     - name: Sign APK
       run: |
         APK_PATH=app/build/outputs/apk/release/app-release.apk
         SIGNED_APK_PATH=app/build/outputs/apk/release/app-release-signed.apk
 
-        $ANDROID_HOME/build-tools/34.0.0/lib/apksigner.jar sign --ks cashback.keystore \
+        $ANDROID_HOME/build-tools/34.0.0/lib/apksigner.jar sign --ks cashback.p12 \
           --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} \
           --key-pass pass:${{ secrets.KEY_PASSWORD }} \
           --out $SIGNED_APK_PATH $APK_PATH
