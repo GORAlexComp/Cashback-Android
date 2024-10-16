@@ -102,7 +102,7 @@ jobs:
     - name: Send APK to Telegram
       if: ${{ success() }}
       run: |
-        APK_PATH=$(pwd)/app/build/outputs/apk/release/app-release.apk
+        APK_PATH=app/build/outputs/apk/release/app-release.apk
         http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
           document@"$APK_PATH" \
@@ -112,8 +112,7 @@ jobs:
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
       run: |
-        http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
+        http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
-          document@"$APK_PATH" \
-          caption="❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!" \
+          message="❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!" \
           parse_mode="Markdown"
