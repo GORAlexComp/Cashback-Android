@@ -103,9 +103,14 @@ jobs:
       if: ${{ success() }}
       run: |
         APK_PATH=app/build/outputs/apk/release/app-release.apk
-        VERSION_NAME=$(echo "${{ env.VERSION_NAME }}" | sed 's/\./\\./g')
-        COMMIT_URL=$(echo "${{ env.commiturl }}" | sed 's/\./\\./g')
-        RELEASE_URL=$(echo "${{ github.event.release.html_url }}" | sed 's/\./\\./g')
+
+        escape_markdown() {
+          echo "$1" | sed -E 's/([\.\-\(\)\[\]\{\}\#\+\-\=\|\!\_\*\~\>\<\\/])/\\\1/g'
+        }
+
+        VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
+        COMMIT_URL=$(escape_markdown "${{ env.commiturl }}")
+        RELEASE_URL=$(escape_markdown "${{ github.event.release.html_url }}")
 
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
@@ -117,7 +122,11 @@ jobs:
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
       run: |
-        VERSION_NAME=$(echo "${{ env.VERSION_NAME }}" | sed 's/\./\\./g')
+        escape_markdown() {
+          echo "$1" | sed -E 's/([\.\-\(\)\[\]\{\}\#\+\-\=\|\!\_\*\~\>\<\\/])/\\\1/g'
+        }
+
+        VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
 
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
