@@ -112,7 +112,7 @@ jobs:
           📝 *Що змінилося*: [${ RELEASE_URL }](${ RELEASE_URL })
           
           #Android #apk
-        EOF)
+          EOF)
 
         http --ignore-stdin --form POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
           chat_id="${{ secrets.TELEGRAM_CHANNEL_ID }}" \
