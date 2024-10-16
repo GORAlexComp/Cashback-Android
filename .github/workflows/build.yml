@@ -79,12 +79,12 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: v$VERSION_NAME
-        release_name: Release v$VERSION_NAME
+        tag_name: v${VERSION_NAME}
+        release_name: Release v${VERSION_NAME}
         body: |
-          Release for version v$VERSION_NAME
+          Release for version v${VERSION_NAME}
 
-          [Commit link]($commiturl)
+          [Commit link](${commiturl})
         draft: true
         prerelease: false
 
@@ -103,9 +103,9 @@ jobs:
       if: ${{ success() }}
       run: |
         APK_PATH=app/build/outputs/apk/release/app-release.apk
-        VERSION_NAME=${{ env.VERSION_NAME }}
-        COMMIT_URL=${{ env.commiturl }}
-        RELEASE_URL=${{ github.event.release.html_url }}
+        VERSION_NAME=$(echo "${{ env.VERSION_NAME }}" | sed 's/\./\\./g')
+        COMMIT_URL=$(echo "${{ env.commiturl }}" | sed 's/\./\\./g')
+        RELEASE_URL=$(echo "${{ github.event.release.html_url }}" | sed 's/\./\\./g')
 
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
@@ -117,7 +117,9 @@ jobs:
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
       run: |
+        VERSION_NAME=$(echo "${{ env.VERSION_NAME }}" | sed 's/\./\\./g')
+
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
-          text="❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!" \
-          parse_mode="Markdown"
+          text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${VERSION_NAME}!" \
+          parse_mode="MarkdownV2"
