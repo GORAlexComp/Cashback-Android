@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      COMMIT_URL: "https://github.com/${{ github.repository }}/commit/${{github.sha}}"
+      COMMIT_URL: "https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
@@ -103,19 +103,19 @@ jobs:
       if: ${{ success() }}
       env:
         APK_PATH: app/build/outputs/apk/release/app-release.apk
-        RELEASE_URL: "https://github.com/GORAlexComp/Cashback-Android/commits/v${VERSION_NAME}"
+        RELEASE_URL: "https://github.com/GORAlexComp/Cashback-Android/commits/v${{ VERSION_NAME }}"
+        CAPTION: |
+          ✅ *Нова версія застосунку* v${ VERSION_NAME } успішно зібрана!
+          
+          🏷 *Комміт*: [${ COMMIT_URL }](${ COMMIT_URL })
+          📝 *Що змінилося*: [${ RELEASE_URL }](${ RELEASE_URL })
+          
+          #Android #apk
       run: |
-        CAPTION="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\! \
-          \
-          🏷 *Комміт*: [${COMMIT_URL}](${COMMIT_URL}) \
-          📝 *Що змінилося*: [${RELEASE_URL}](${RELEASE_URL}) \
-          \
-          #Android #apk"
-
         http --ignore-stdin --form POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
           chat_id="${{ secrets.TELEGRAM_CHANNEL_ID }}" \
           document@$APK_PATH \
-          caption="${CAPTION}" \
+          caption="${ CAPTION }" \
           link_preview_options={"is_disabled":true} \
           parse_mode="Markdown"
           
@@ -124,5 +124,5 @@ jobs:
       run: |
         http --ignore-stdin -F POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
-          text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${VERSION_NAME}!" \
+          text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${ VERSION_NAME }!" \
           parse_mode="Markdown"
