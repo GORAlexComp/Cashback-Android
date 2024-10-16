@@ -105,7 +105,7 @@ jobs:
         APK_PATH=app/build/outputs/apk/release/app-release.apk
 
         escape_markdown() {
-          echo "$1" | sed 's/[][(){}#*_\-~`>+=|.!]/\\&/g'
+          echo "$1" | sed -E 's/([_*\[\]()~`>#\+=|{}.!\\-])/\\\1/g'
         }
 
         VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
@@ -115,7 +115,7 @@ jobs:
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
           document@"$APK_PATH" \
-          caption="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\!\n\n🏷 *Комміт*: \[$COMMIT_URL\]\($COMMIT_URL\)\n📝 *Що змінилося*: \[$RELEASE_URL\]\($RELEASE_URL\)" \
+          caption="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\!\n\n🏷 *Комміт*: \[${COMMIT_URL}\]\(${COMMIT_URL}\)\n📝 *Що змінилося*: \[${RELEASE_URL}\]\(${RELEASE_URL}\)" \
           parse_mode="MarkdownV2"
           link_preview_options={"is_disabled":true}
           
@@ -123,7 +123,7 @@ jobs:
       if: ${{ failure() }}
       run: |
         escape_markdown() {
-          echo "$1" | sed 's/[][(){}#*_\-~`>+=|.!]/\\&/g'
+          echo "$1" | sed -E 's/([_*\[\]()~`>#\+=|{}.!\\-])/\\\1/g'
         }
 
         VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
