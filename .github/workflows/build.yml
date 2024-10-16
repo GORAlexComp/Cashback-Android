@@ -85,7 +85,7 @@ jobs:
         APK_PATH=app/build/outputs/apk/release/app-release.apk
         SIGNED_APK_PATH=app/build/outputs/apk/release/app-release-signed.apk
 
-        $ANDROID_HOME/build-tools/34.0.0/lib/apksigner.jar sign --ks cashback.p12 \
+        java -jar $ANDROID_HOME/build-tools/34.0.0/lib/apksigner.jar sign --ks cashback.p12 \
           --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} \
           --key-pass pass:${{ secrets.KEY_PASSWORD }} \
           --out $SIGNED_APK_PATH $APK_PATH
