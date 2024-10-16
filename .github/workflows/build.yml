@@ -87,6 +87,9 @@ jobs:
           [Commit link](${commiturl})
         draft: true
         prerelease: false
+      env:
+        VERSION_NAME: ${{ env.VERSION_NAME }}
+        COMMIT_URL: ${{ env.commiturl }}
 
     - name: Upload APK to Release
       uses: actions/upload-release-asset@v1
@@ -105,7 +108,7 @@ jobs:
         APK_PATH=app/build/outputs/apk/release/app-release.apk
 
         escape_markdown() {
-          echo "$1" | sed -E 's/([\.\-\(\)\[\]\{\}\#\+\-\=\|\!\_\*\~\>\<\\/])/\\\1/g'
+          echo "$1" | sed 's/[\.\-\(\)\[\]\{\}\#\+\=\|\!\_\*\~\/\\]/\\&/g'
         }
 
         VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
@@ -123,7 +126,7 @@ jobs:
       if: ${{ failure() }}
       run: |
         escape_markdown() {
-          echo "$1" | sed -E 's/([\.\-\(\)\[\]\{\}\#\+\-\=\|\!\_\*\~\>\<\\/])/\\\1/g'
+          echo "$1" | sed 's/[\.\-\(\)\[\]\{\}\#\+\=\|\!\_\*\~\/\\]/\\&/g'
         }
 
         VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
