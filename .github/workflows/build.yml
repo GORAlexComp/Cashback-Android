@@ -101,14 +101,20 @@ jobs:
 
     - name: Send APK to Telegram
       if: ${{ success() }}
+      env:
+        APK_PATH: app/build/outputs/apk/release/app-release.apk
+        RELEASE_URL: "https://github.com/GORAlexComp/Cashback-Android/commits/v${VERSION_NAME}"
+        CAPTION: |
+          ✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана!
+
+          🏷 *Комміт*: [${COMMIT_URL}](${COMMIT_URL})
+          📝 *Що змінилося*: [${RELEASE_URL}](${RELEASE_URL})
       run: |
-        APK_PATH=app/build/outputs/apk/release/app-release.apk
-        RELEASE_URL="https://github.com/GORAlexComp/Cashback-Android/commits/v${VERSION_NAME}"
 
         http --ignore-stdin --form POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
           chat_id="${{ secrets.TELEGRAM_CHANNEL_ID }}" \
           document@$APK_PATH \
-          caption="✅ *Нова версія застосунку* v${VERSION_NAME} успішно зібрана\!\n\n🏷 *Комміт*: [${COMMIT_URL}](${COMMIT_URL})\n📝 *Що змінилося*: [${RELEASE_URL}](${RELEASE_URL})" \
+          caption="${CAPTION}" \
           link_preview_options={"is_disabled":true} \
           parse_mode="Markdown"
           
@@ -117,5 +123,5 @@ jobs:
       run: |
         http --ignore-stdin -F POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
-          text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${VERSION_NAME}\!" \
+          text="❌ *Трапилась помилка* під час збірки нової версії застосунку v${VERSION_NAME}!" \
           parse_mode="Markdown"
