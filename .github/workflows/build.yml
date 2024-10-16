@@ -103,13 +103,8 @@ jobs:
       if: ${{ success() }}
       run: |
         APK_PATH="app/build/outputs/apk/release/app-release.apk"
-
-        escape_markdown() {
-          echo "$1" | sed -E 's/([_*[\](){}~`>#+\-\.|])/\\\1/g'
-        }
-
-        VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
-        COMMIT_URL=$(escape_markdown "${{ secrets.commiturl }}")
+        VERSION_NAME=${{ env.VERSION_NAME }}
+        COMMIT_URL=${{ secrets.commiturl }}
 
         http --ignore-stdin --form POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument" \
           chat_id="${{ secrets.TELEGRAM_CHANNEL_ID }}" \
@@ -121,11 +116,7 @@ jobs:
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
       run: |
-        escape_markdown() {
-          echo "$1" | sed -E 's/([_*[\](){}~`>#+\-\.|])/\\\1/g'
-        }
-
-        VERSION_NAME=$(escape_markdown "${{ env.VERSION_NAME }}")
+        VERSION_NAME=${{ env.VERSION_NAME }}
 
         http --ignore-stdin --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
           chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
