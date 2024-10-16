@@ -96,26 +96,24 @@ jobs:
         asset_name: app-release.apk
         asset_content_type: application/vnd.android.package-archive
 
+    - name: Install HTTPie
+      run: sudo apt-get install httpie
+
     - name: Send APK to Telegram
       if: ${{ success() }}
-      uses: appleboy/telegram-action@master
-      with:
-        to: $TELEGRAM_CHANNEL_ID
-        token: $TELEGRAM_BOT_TOKEN
-        message: |
-          ✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!
-
-          🏷 *Комміт*: [$commiturl]($commiturl)
-          📝 *Що змінилося*: ${{ github.event.release.html_url }}
-        document: app/build/outputs/apk/release/app-release.apk
-        format : markdown
-
+      run: |
+        APK_PATH=$(pwd)/app/build/outputs/apk/release/app-release.apk
+        http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
+          chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
+          document@"$APK_PATH" \
+          caption="✅ *Нова версія застосунку* v$VERSION_NAME успішно зібрана!\n\n🏷 *Комміт*: [$commiturl]($commiturl)\n📝 *Що змінилося*: ${{ github.event.release.html_url }}" \
+          parse_mode="Markdown"
+          
     - name: Notify Telegram on Failure
       if: ${{ failure() }}
-      uses: appleboy/telegram-action@master
-      with:
-        to: $TELEGRAM_CHANNEL_ID
-        token: $TELEGRAM_BOT_TOKEN
-        message: |
-          ❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!
-        format : markdown
+      run: |
+        http --form POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument \
+          chat_id=${{ secrets.TELEGRAM_CHANNEL_ID }} \
+          document@"$APK_PATH" \
+          caption="❌ *Трапилась помилка* під час збірки нової версії застосунку v$VERSION_NAME!" \
+          parse_mode="Markdown"
